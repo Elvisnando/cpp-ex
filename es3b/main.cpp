@@ -18,64 +18,62 @@ nodoP* addNodoP(nodoP* p,nodo*  info);
 nodo* addNodo(nodo* p,int num);
 void print(nodo* p);
 void printA(nodoP* p);
+void H(nodoP* A,nodo* &R);
 
 int main () {
     
     nodo* L1 = nullptr;
     nodo* L2 = nullptr;
     nodo* L3 = nullptr;
-    L1 = addNodo(L1,3);
+    nodo* R = nullptr;
+    L1 = addNodo(L1,10);
     L1 = addNodo(L1,7);
-    L1 = addNodo(L1,8);
-    L2 = addNodo(L2,2);
-    L2 = addNodo(L2,6);
-    L2 = addNodo(L2,6);
-    L3 = addNodo(L3,1);
+    L1 = addNodo(L1,9);
+    L2 = addNodo(L2,5);
+    L2 = addNodo(L2,19);
+    L2 = addNodo(L2,200);
+    L3 = addNodo(L3,80);
     L3 = addNodo(L3,91);
-    L3 = addNodo(L3,10001);
-  /*    nodo* L4 = nullptr;
-    L4 = addNodo(L4,6);
-    L4 = addNodo(L4,7);
-    L4 = addNodo(L4,8);*/
-    
-    
-    
+    L3 = addNodo(L3,100);
+
     
     nodoP* A = nullptr;
     A = addNodoP(A,L1);
     A = addNodoP(A,L2);
     A = addNodoP(A,L3);
-  //   A = addNodoP(A,L4);
     printA(A);
     
-    nodoP* PR = nullptr;
+  /*  nodoP* PR = nullptr;
     PR = G(A);
-    printA(PR);
+    printA(PR);*/
+ 
+   H(A,R);
+   cout<<"R che ottengo dopo la funzione H: \n";
+    print(R);
+    
     return 0;
 };
-int num = 100000;
-nodoP* q;
+int num = 1000000;
+nodoP* q=nullptr;
+
 nodoP* G(nodoP* A) {
-    
-    if(A->nextnodoP == NULL) {
+    if(A==nullptr){return q;}
+    if(A->info==nullptr) {A=A->nextnodoP;}
+    if(A->nextnodoP == NULL ) {
         if(A->info->n < num) {
             num = A->info->n;
-            cout<<num<<"\n";
             q = A;
-            
-        }
-       
-        return q;
+        }   
+    return q;
     } else {
+        
         if(A->info->n < num) {
             num = A->info->n;
-            cout<<num<<"\n";
-            q = A;
-            
+            q = A; 
         }
-        G(A->nextnodoP);
+        
+    G(A->nextnodoP);
     }
-    
     
 };
 
@@ -128,7 +126,7 @@ nodo* addNodo(nodo* p,int num) {
 void print(nodo* p) {
     
     if( p== NULL) {
-        cout<<"Lista Vuota";
+        cout<<"Lista Vuota \n";
     } else {
         while(p->nextnodo != NULL) {
             cout<< p->n<<" -> ";
@@ -153,4 +151,39 @@ void printA(nodoP* p) {
     }
     
 };
+nodoP* x =nullptr;
+void H(nodoP* A,nodo* &R) {
+    
+     x = G(A);
+    cout<<"out di G(A) su x : \t";
+    printA(x );
+    
+   cout<<"PRINT A DOPO modifiche : \t";
+    printA(A);
+    if( x->info !=  nullptr) {
+        if(x->info->nextnodo != nullptr){
+        R = addNodo(R,x->info->n);
+        x->info = x->info->nextnodo;
+        } else {
+            R = addNodo(R,x->info->n);
+            x->info = nullptr;
+           // A->info=nullptr;
+            //x=x->nextnodoP;
+         
+        }
+   /*   cout<<"Stampa di R: \n ";
+      print(R);*/
+      
+    H(A,R);
+      
+        
+    } else {
+        
+        
+    }
+    
+    
+};
+
+
 
