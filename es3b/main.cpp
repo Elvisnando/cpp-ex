@@ -26,11 +26,11 @@ int main () {
     nodo* L2 = nullptr;
     nodo* L3 = nullptr;
     nodo* R = nullptr;
-    L1 = addNodo(L1,10);
+    L1 = addNodo(L1,90);
     L1 = addNodo(L1,7);
     L1 = addNodo(L1,9);
-    L2 = addNodo(L2,5);
-    L2 = addNodo(L2,19);
+ /*   L2 = addNodo(L2,5);
+    L2 = addNodo(L2,19);*/
     L2 = addNodo(L2,200);
     L3 = addNodo(L3,80);
     L3 = addNodo(L3,91);
@@ -41,13 +41,13 @@ int main () {
     A = addNodoP(A,L1);
     A = addNodoP(A,L2);
     A = addNodoP(A,L3);
-    printA(A);
+  /*  printA(A);
     
-  /*  nodoP* PR = nullptr;
+   nodoP* PR = nullptr;
     PR = G(A);
     printA(PR);*/
  
-   H(A,R);
+  H(A,R);
    cout<<"R che ottengo dopo la funzione H: \n";
     print(R);
     
@@ -58,23 +58,28 @@ nodoP* q=nullptr;
 
 nodoP* G(nodoP* A) {
     if(A==nullptr){return q;}
-    if(A->info==nullptr) {A=A->nextnodoP;}
-    if(A->nextnodoP == NULL ) {
-        if(A->info->n < num) {
-            num = A->info->n;
-            q = A;
-        }   
-    return q;
+    if(A->info==nullptr && A->nextnodoP != nullptr ) {
+        A=A->nextnodoP;
+         G(A);
+        
     } else {
+        if(A->nextnodoP == NULL ) {
+            if(A->info->n < num) {
+                num = A->info->n;
+                q = A;
+            }   
+        return q;
+        } else {
         
-        if(A->info->n < num) {
-            num = A->info->n;
-            q = A; 
+            if(A->info->n < num) {
+                num = A->info->n;
+                q = A; 
+            }
+        
+        G(A->nextnodoP);
         }
-        
-    G(A->nextnodoP);
     }
-    
+   
 };
 
 
@@ -152,34 +157,33 @@ void printA(nodoP* p) {
     
 };
 nodoP* x =nullptr;
+nodoP* ar=nullptr;
 void H(nodoP* A,nodo* &R) {
+    cout<<"PRINT A DOPO modifiche : \t";
+    printA(A);
+    
     
      x = G(A);
     cout<<"out di G(A) su x : \t";
-    printA(x );
+    printA(x);
     
-   cout<<"PRINT A DOPO modifiche : \t";
-    printA(A);
+   
     if( x->info !=  nullptr) {
         if(x->info->nextnodo != nullptr){
         R = addNodo(R,x->info->n);
         x->info = x->info->nextnodo;
         } else {
             R = addNodo(R,x->info->n);
+            
             x->info = nullptr;
            // A->info=nullptr;
             //x=x->nextnodoP;
-         
         }
-   /*   cout<<"Stampa di R: \n ";
-      print(R);*/
+        H(A,R);
       
-    H(A,R);
-      
-        
     } else {
         
-        
+       
     }
     
     
