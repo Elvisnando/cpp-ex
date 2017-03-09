@@ -26,28 +26,28 @@ int main () {
     nodo* L2 = nullptr;
     nodo* L3 = nullptr;
     nodo* R = nullptr;
-    L1 = addNodo(L1,90);
-    L1 = addNodo(L1,7);
-    L1 = addNodo(L1,9);
- /*   L2 = addNodo(L2,5);
-    L2 = addNodo(L2,19);*/
-    L2 = addNodo(L2,200);
-    L3 = addNodo(L3,80);
-    L3 = addNodo(L3,91);
-    L3 = addNodo(L3,100);
+    L1 = addNodo(L1,1);
+    L1 = addNodo(L1,100);
+    L1 = addNodo(L1,3);
+    L2 = addNodo(L2,6);
+    L2 = addNodo(L2,5);
+    L2 = addNodo(L2,7);
+    L3 = addNodo(L3,10);
+    L3 = addNodo(L3,11);
+    L3 = addNodo(L3,12);
 
     
     nodoP* A = nullptr;
     A = addNodoP(A,L1);
     A = addNodoP(A,L2);
-    A = addNodoP(A,L3);
-  /*  printA(A);
+  //  A = addNodoP(A,L3);
+   printA(A);
     
-   nodoP* PR = nullptr;
+  /* nodoP* PR = nullptr;
     PR = G(A);
     printA(PR);*/
  
-  H(A,R);
+   H(A,R);
    cout<<"R che ottengo dopo la funzione H: \n";
     print(R);
     
@@ -55,31 +55,33 @@ int main () {
 };
 int num = 1000000;
 nodoP* q=nullptr;
-
 nodoP* G(nodoP* A) {
+    
     if(A==nullptr){return q;}
+    
     if(A->info==nullptr && A->nextnodoP != nullptr ) {
         A=A->nextnodoP;
          G(A);
         
     } else {
-        if(A->nextnodoP == NULL ) {
+        if(A->nextnodoP == nullptr && A->info != nullptr ) {
             if(A->info->n < num) {
                 num = A->info->n;
                 q = A;
+                
             }   
-        return q;
+            return q;
+        
         } else {
         
             if(A->info->n < num) {
                 num = A->info->n;
                 q = A; 
             }
-        
-        G(A->nextnodoP);
+        return q = G(A->nextnodoP);
         }
     }
-   
+    
 };
 
 
@@ -88,18 +90,18 @@ nodoP* pa=p;
     if (p == NULL) {
         nodoP* pn = new nodoP;
         pn->info = inf;
-        pn->nextnodoP=NULL;
+        pn->nextnodoP=nullptr;
         return pn;
         
     } else {
-        while(p->nextnodoP != NULL) {
+        while(p->nextnodoP != nullptr) {
             p=p->nextnodoP;
         }
         nodoP * pn = new nodoP;
         pn->info=inf;
         pn->nextnodoP=nullptr;
         p->nextnodoP=pn;
-        nodo* R = nullptr; // lista di nodi da popolare ordinata 
+        
         
         return pa;
     }
@@ -108,10 +110,10 @@ nodoP* pa=p;
 nodo* addNodo(nodo* p,int num) {
     
     nodo* pa=p;
-    if (p == NULL) {
+    if (p == nullptr) {
         nodo* pn = new nodo;
         pn->n = num;
-        pn->nextnodo=NULL;
+        pn->nextnodo=nullptr;
         return pn;
         
     } else {
@@ -161,32 +163,32 @@ nodoP* ar=nullptr;
 void H(nodoP* A,nodo* &R) {
     cout<<"PRINT A DOPO modifiche : \t";
     printA(A);
-    
-    
      x = G(A);
     cout<<"out di G(A) su x : \t";
     printA(x);
     
-   
-    if( x->info !=  nullptr) {
-        if(x->info->nextnodo != nullptr){
+    
+    if(x) {
+  
+        if(x->info->nextnodo != nullptr) {
         R = addNodo(R,x->info->n);
         x->info = x->info->nextnodo;
+        H(A,R);
+        
+      
         } else {
             R = addNodo(R,x->info->n);
+            cout<<"SONO QUAAA\n";
+            x->info=nullptr;
             
-            x->info = nullptr;
-           // A->info=nullptr;
-            //x=x->nextnodoP;
+           // x=x->nextnodoP;
+          
         }
-        H(A,R);
-      
     } else {
         
-       
+        R= nullptr;
     }
-    
-    
+         
 };
 
 
