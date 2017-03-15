@@ -28,10 +28,10 @@ int main(int argc, char** argv) {
 	 nodo* p=NULL;
 	 DN f;
 	 p = addNodo(p,1);
-	 p = addNodo(p,2);
+	/* p = addNodo(p,2);
      p = addNodo(p,3);
 	 p = addNodo(p,4);
-	 p = addNodo(p,5);
+	 p = addNodo(p,5);*/
    /*  p = addNodo(p,6);
      p = addNodo(p,7);*/
      
@@ -42,12 +42,12 @@ int main(int argc, char** argv) {
 	 print(p);
     DN z;
     
-   /*  z= SL(p);
+     z= SL(p);
      print(z.L1);
-     print(z.L2);*/
-      RL(p,L1,L2);
+     print(z.L2);
+   /*   RL(p,L1,L2);
 	 print(L1);
-     print(L2);
+     print(L2);*/
 	 
 	return 0;
 };
@@ -158,7 +158,7 @@ void R(nodo* L, nodo* &L1, nodo* &L2) {
 DN w;
 DN SL(nodo* L) {
     
-    if( L == NULL) {  
+    if( L == nullptr) {  
         
          return w;
     } else {   
