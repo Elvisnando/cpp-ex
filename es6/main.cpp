@@ -18,6 +18,8 @@ struct nodoL {
     
 };
 
+int  G(nodoA* R, char *P, int dim_P);
+
 
 
 nodoL* addNodoL(nodoL* p, nodoA* inf);
@@ -49,17 +51,19 @@ int main() {
     R->dx = new nodoA;
     R->dx->x = 'c';
     R->dx->dx=new nodoA;
-    R->dx->dx->x = '0';
+    R->dx->dx->x = 'x';
     R->dx->sx=new nodoA;
     R->dx->sx->x= 'a';
     R->dx->sx->sx = new nodoA;
-    R->dx->sx->sx->x = 'x';
+    R->dx->sx->sx->x = '0';
     R->dx->dx->dx = new nodoA;
     R->dx->dx->dx->x = 'b';
    // printA(R);
     nodoL* k= nullptr;
     k = F(R,P,1);
     printL(k);
+    int a = G(R,P,2);
+    cout<<a;
     
     
     
@@ -146,13 +150,13 @@ nodoL* F(nodoA* R, char *P, int dim_P) {
         if (R->x == P[c]) {
             c++;
             addNodol(U,R);
-            U = F(R->dx,P,dim_P);
-            U = F(R->sx,P,dim_P);
+            F(R->dx,P,dim_P);
+            F(R->sx,P,dim_P);
+            
         } else {
             
-            U = F(R->dx,P,dim_P);
-            U = F(R->sx,P,dim_P);
-            
+             F(R->dx,P,dim_P);
+             F(R->sx,P,dim_P); 
             
             
         }
@@ -185,21 +189,34 @@ void addNodol(nodoL* &p, nodoA* N) {
         
 };
 
-/* else {
-        if(R->x == P[c]) {
+int d;
+
+int  G(nodoA* R, char *P, int dim_P) {
+    
+    if(R == nullptr ) {
+           
+        return c ;
+        
+    } else {
+        
+        if (R->x == P[c]) {
             c++;
-            if(R->dx->x == P[c]) {
-                addNodol(U,R);
-               return F(R->dx,P,dim_P);
-            } else {
-                if(R->sx->x == P[c]) {
-                    addNodol(U,R);
-                  return  F(R->sx,P,dim_P);
-                }
-            }
+            
+             G(R->dx,P,dim_P);
+             G(R->sx,P,dim_P);
+             
+            
         } else {
-            return F(R->dx,P,dim_P);
-        } 
-    }*/
+           // d++;
+               G(R->dx,P,dim_P);
+               G(R->sx,P,dim_P); 
+            
+            
+            
+        }
+    }
+  
+   
+};
 
 
