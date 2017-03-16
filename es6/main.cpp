@@ -38,6 +38,7 @@ int main() {
     char P[2];
     P[0] = 'c';
     P[1] = 'x';
+   
     cout<<P[0]<<"->"<<P[1]<<"\n";
     
    
@@ -45,7 +46,7 @@ int main() {
     // riproduco albero del esercizio
     
     nodoA* R = new nodoA;
-    R->x = 'x';
+    R->x = 'f';
     R->sx = new nodoA;
     R->sx->x = 'y';
     R->dx = new nodoA;
@@ -59,11 +60,11 @@ int main() {
     R->dx->dx->dx = new nodoA;
     R->dx->dx->dx->x = 'b';
    // printA(R);
-    nodoL* k= nullptr;
-    k = F(R,P,1);
-    printL(k);
+  /* nodoL* k= nullptr;
+    k = F(R,P,2);
+    printL(k);*/
     int a = G(R,P,2);
-    cout<<a;
+    cout<<a<<"\n";
     
     
     
@@ -141,27 +142,23 @@ int c =0;
 
 nodoL * U =nullptr;
 
+
 nodoL* F(nodoA* R, char *P, int dim_P) {
     if(R == nullptr ) {
-           return U;
+        return U;
         
     } else {
         
         if (R->x == P[c]) {
             c++;
             addNodol(U,R);
-            F(R->dx,P,dim_P);
-            F(R->sx,P,dim_P);
-            
-        } else {
-            
-             F(R->dx,P,dim_P);
-             F(R->sx,P,dim_P); 
-            
             
         }
+           F(R->dx,P,dim_P);
+           F(R->sx,P,dim_P); 
+        
     }
-  //  if (c != dim_P) {return nullptr;}
+ 
    
 };
 
@@ -189,32 +186,36 @@ void addNodol(nodoL* &p, nodoA* N) {
         
 };
 
-int d;
 
+bool prova = false;
+ int d=0;
+ int spia =0;
 int  G(nodoA* R, char *P, int dim_P) {
-    
+   
     if(R == nullptr ) {
            
-        return c ;
+        return d ;
         
     } else {
         
         if (R->x == P[c]) {
-            c++;
             
-             G(R->dx,P,dim_P);
-             G(R->sx,P,dim_P);
-             
+           cout<<"eccolo\n";
+           c++;
+           if(c==dim_P && spia==1) {
+               d++;
+            } 
+            spia=1;
             
-        } else {
-           // d++;
-               G(R->dx,P,dim_P);
-               G(R->sx,P,dim_P); 
-            
-            
-            
-        }
+        }else {
+            spia =0;
+        } 
+        G(R->dx,P,dim_P); 
+        G(R->sx,P,dim_P);
+        
+         
     }
+  // if(prova) {cout<<"è vero";}
   
    
 };
