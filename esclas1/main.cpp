@@ -1,6 +1,7 @@
 #include <iostream>
 #include "disel.h"
 #include "benzina.h"
+#include "aci.h"
 using namespace std;
 using namespace Auto;
 
@@ -9,7 +10,7 @@ using namespace Auto;
 int main() {
     Diesel* a;
     a = new Diesel(105);
-    cout<< a->Bollo()<<"\n";
+    cout<< a->bollo()<<"\n";
     
     Benzina* b;
     b = new Benzina(1000);
@@ -19,8 +20,13 @@ int main() {
     
     
     
-    Automobile *benzina = new Benzina(1);
-    Automobile *diesel = new Diesel(1);
+    Automobile *benzina = new Benzina(1000);
+    Automobile *diesel = new Diesel(70);
+    Aci * q = new Aci();
+    q->aggiungiAuto(*benzina);
+    q->aggiungiAuto(*diesel);
+    
+    
    
     
     

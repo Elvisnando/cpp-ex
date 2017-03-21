@@ -6,7 +6,7 @@ class Diesel : public Automobile {
     
 public:
     Diesel(int x);
-    int Bollo();
+    int bollo();
     
     
     

@@ -7,7 +7,7 @@ Diesel::Diesel(int x)
         
 }
     
-int Diesel::Bollo() {
+int Diesel::bollo() {
     
    return  tassa() +100;
 
