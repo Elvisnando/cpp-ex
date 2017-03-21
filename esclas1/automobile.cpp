@@ -1,25 +1,23 @@
 #include "automobile.h"
 
-Auto::Automobile::Automobile()
+namespace Auto {
+    
+Automobile::Automobile(int x)
 {
-    cavalli=0;
+    cavalli=x;
 
 }
 
-Auto::Automobile::Automobile(int n)
-{
-    cavalli = n;
 
-}
 
-int Auto::Automobile::tassa()
+int Automobile::tassa()
 {
     return cavalli*5;
 
 }
 
 
-
+};
 
 
 

@@ -4,14 +4,11 @@
 
 
 namespace Auto {
-    class Automobile;
-}
 
-class Auto::Automobile {
+class Automobile {
     
     public:
-        Automobile();
-        Automobile(int n);
+        Automobile(int x);
         int tassa();
         
     private:
@@ -20,4 +17,6 @@ class Auto::Automobile {
     
     
 };
+
+}
 #endif 
