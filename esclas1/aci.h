@@ -9,7 +9,7 @@ namespace Auto {
         
     public:
         Aci();
-        vector<Automobile> v;
+        vector<Automobile*> v;
        void aggiungiAuto(const Automobile& a);
         int incassiBolli();
         
