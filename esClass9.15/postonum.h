@@ -4,9 +4,11 @@
 class Postonum : public Biglietto  {
     
 public:
-    int nfila;
     Postonum();
     Postonum(int fila, string nome);
-    
-    
+
+    int numeroFila() const;
+
+private:
+    int nfila;
 };

@@ -7,10 +7,14 @@ Postonum::Postonum()
 
 
 Postonum::Postonum(int fila, string nome) 
-:Biglietto(GALLERIA,nome)
+    :Biglietto(GALLERIA,nome)
+    , nfila(fila)
 {
-    nfila = fila;
-    
+}
+
+int Postonum::numeroFila() const
+{
+    return nfila;
 }
 
 
