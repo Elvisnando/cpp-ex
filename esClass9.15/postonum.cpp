@@ -17,4 +17,10 @@ int Postonum::numeroFila() const
     return nfila;
 }
 
+void Postonum::stampa()
+{
+    cout<<"num : "<<numeroFila();
+}
+
+
 

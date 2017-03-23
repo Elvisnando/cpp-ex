@@ -6,3 +6,8 @@ Postononnum::Postononnum(Postononnum::prezzo a,Biglietto::COLL b,string nome)
     pr = a;
 
 }
+
+void Postononnum::stampa()
+{
+ cout<<"posto non numerato : \n";
+}

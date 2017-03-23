@@ -6,7 +6,12 @@ class Spettacolo {
 
 public:
     Spettacolo();
-    void aggiungiBiglietto(const Biglietto &a);
+    void aggiungiBiglietto( Biglietto &a);
+    list<Biglietto*> ritornaLista() const;
+    int posnum();
+    double prezzo(Biglietto *a);
+    double incasso();
+    
 
 private:
     int B;

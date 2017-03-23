@@ -23,6 +23,7 @@ public:
     Biglietto(COLL a, string nome);
     Biglietto::COLL retruncol();
     std::string name() const;
+    virtual void stampa();
     
 private:
     

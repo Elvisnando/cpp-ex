@@ -12,6 +12,7 @@ public:
     };
     prezzo pr;
     Postononnum(prezzo a,COLL b,string nome);
+    void stampa();
     
     
 };

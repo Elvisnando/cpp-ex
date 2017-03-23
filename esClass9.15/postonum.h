@@ -6,6 +6,7 @@ class Postonum : public Biglietto  {
 public:
     Postonum();
     Postonum(int fila, string nome);
+    void stampa();
 
     int numeroFila() const;
 

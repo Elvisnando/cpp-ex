@@ -29,5 +29,12 @@ Biglietto::Biglietto(Biglietto::COLL a,string nome)
 
 }
 
+  void Biglietto::stampa()
+{
+    cout<<"Nome Acquirente"<<nomeaquirente<<"\n";
+
+
+}
+
 
 
