@@ -32,20 +32,7 @@ int main() {
     * 
     * e il numero fila lo moltiplichi per 123 e mi stampi il risultato
     */
-   list<Biglietto*> lista = s->ritornaLista();
-   
-   
-   
-  
-
-
-
-   
-
-
-
-
-
+   //list<Biglietto*> lista = s->ritornaLista();
     return 0;
     
 };

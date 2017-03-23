@@ -1,16 +1,12 @@
-
 #include"biglietto.h"
 #include <string>
-using namespace std;
 
+using namespace std;
 
 Biglietto::Biglietto()
 {
 
 }
-
-
-
 
 Biglietto::COLL Biglietto::retruncol()
 {
@@ -26,15 +22,9 @@ Biglietto::Biglietto(Biglietto::COLL a,string nome)
 {
     colocazione = a;
     nomeaquirente = nome;
-
 }
 
   void Biglietto::stampa()
 {
     cout<<"Nome Acquirente"<<nomeaquirente<<"\n";
-
-
 }
-
-
-

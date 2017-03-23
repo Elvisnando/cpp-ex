@@ -5,8 +5,8 @@
 
 #include <iostream>
 #include <string>
-using namespace std;
 
+using namespace std;
 
 class Biglietto {
     
@@ -29,8 +29,6 @@ private:
     
     string nomeaquirente;
     COLL colocazione;
-    
-    
 };
 
 #endif 

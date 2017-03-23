@@ -7,7 +7,6 @@ public:
     Postonum();
     Postonum(int fila, string nome);
     void stampa();
-
     int numeroFila() const;
 
 private:
