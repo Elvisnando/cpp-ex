@@ -1,7 +1,8 @@
 #include<ios>
 #include<iosfwd>
 #include<fstream>
-#include <sstream>  
+#include <sstream>
+#include<iostream>
 
 
 
@@ -23,7 +24,7 @@ int main () {
     
     
     
-    cout<<"conta: "<<c.conta<istream>(r)<<"\n";
+    cout<<"conta: "<<c.conta(r)<<"\n";
     
     return 0;
 };
