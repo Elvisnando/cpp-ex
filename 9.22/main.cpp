@@ -8,6 +8,7 @@
 #include"cliente.h"
 #include "clientefedele.h"
 #include "ritiroPremio.h"
+#include"gestionegiornaliera.h"
 
 using namespace std;
 
@@ -21,29 +22,19 @@ int main () {
     c1.aggiungiAlCarello(pane);
     c1.aggiungiAlCarello(carne);
     
-   ClienteFedele c2("endrit");
+    ClienteFedele c2("endrit");
     c2.aggiungiAlCarello(uovo);
     c2.aggiungiAlCarello(pane);
     c2.aggiungiAlCarello(carne);
     
-  
-    
-    cout<<c1.spesaTotale()<<"\n";
-    
+    cout<<c1.spesaTotale()<<"\n"; 
     cout<< c2.spesaTotale()<<"\n";
     
-     try  
-   {  
-      c2.accreditaPunti(1000); //cause an exception to throw  
-   }  
-  
-   catch(ritiroPremio & e)  
-   {  
-      cout<<e.retuidPremio()<<endl;
-      return -1;  
-   }  
+    gestioneGiornaliera g;
+    g.addCliente(&c1);
+    g.addCliente(&c2);
+    cout<<g.chiudiCassa()<<endl;
+    cout<<g.saldoPuntiGiornaliero()<<endl;
     
-    c2.accreditaPunti(20);
-    
-   
+   return 0;
 };

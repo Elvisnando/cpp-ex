@@ -40,6 +40,9 @@ void ClienteFedele::accreditaPunti(int i)
 
 }
 
+int ClienteFedele::returPuntiAcc()
+{
+    return puntiAcc;
 
-
+}
 

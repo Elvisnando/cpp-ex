@@ -8,10 +8,10 @@ class ClienteFedele : public Cliente {
 public:
     ClienteFedele();
     ClienteFedele(string nome);
-    double spesaTotale();
+    virtual double spesaTotale();
     void aggiungiCarello(Prodotto x);
     void accreditaPunti(int i);
-    
+    int returPuntiAcc();
     
     
 private:
