@@ -18,10 +18,11 @@ Dialog::~Dialog()
 
 void Dialog::onPushButtonD()
 {
-    Messaggio me(as->lineEdit->text(),as->lineEdit_2->text());
-    emit signalemm(me);
-
-
+  //  Messaggio me(as->lineEdit->text(),as->lineEdit_2->text());
+    Messaggio meq(as->lineEdit_2->text(),as->textEdit->toPlainText());
+    emit signalemm(meq);
+    as->lineEdit_2->clear();
+    as->textEdit->clear();
 }
 
 

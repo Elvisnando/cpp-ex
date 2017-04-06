@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "dialog.h"
 #include"form.h"
+#include "spc.h"
+#include "dbmanager.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,10 +26,17 @@ private slots:
     void onClickButtoDelete();
     void onClickButtonDone();
 
+
+
+
+    void onSaveButtonClicked();
+
 private:
     Ui::MainWindow *ui;
     Dialog* x;
-    Form* f;
+    DbManager* db ;
+    int titoloCol;
+
 
 
 

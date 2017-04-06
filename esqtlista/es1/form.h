@@ -5,6 +5,7 @@
 
 
 #include"messaggio.h"
+#include "spc.h"
 
 namespace Ui {
     class Form;
@@ -16,20 +17,24 @@ class Form : public QWidget
 
 public:
     Form(QWidget *parent = nullptr);
+    Messaggio returnMess();
     ~Form();
 
    void insmes(Messaggio a);
 
 private slots:
-   void on_pushButton_2_clicked();
-
-   void on_pushButton_clicked();
+   void onPushButton2Clicked();
+   void onPushButtonClicked();
+   void onPushButton3Clicked();
 
 private:
     Ui::Form *ui;
+    Messaggio mes;
+    Spc* g;
 signals:
     void signalDelete();
     void signalDone();
+    void signalShow(Messaggio a);
 };
 
 #endif // FORM_H

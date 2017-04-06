@@ -12,6 +12,7 @@ Messaggio::Messaggio()
 Messaggio::Messaggio(QString tit, QString mess)
     :title(tit)
     ,message(mess)
+    ,statoDone(false)
 {
 
 }
@@ -24,5 +25,11 @@ QString  Messaggio::getTitle()
 QString Messaggio::getMessage()
 {
      return message;
+
+}
+
+void Messaggio::setStato()
+{
+    statoDone = true;
 
 }
