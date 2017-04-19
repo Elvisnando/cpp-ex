@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     udps(new QUdpSocket)
 {
     ui->setupUi(this);
+   // udps->bind(s->localAddress(),s->localPort()+1);
     connect(s,SIGNAL(connected()),this,SLOT(conessione()));
     connect(ui->pushButton_2,SIGNAL(clicked(bool)),this,SLOT(onClickButtoSend()));
     connect(s, SIGNAL(readyRead()), this, SLOT(readyReadd()));

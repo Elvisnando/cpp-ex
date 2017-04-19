@@ -30,6 +30,7 @@ private:
 private slots:
     void connessione();
     void onClickButtonInvia();
+    void disconnectSocketUdp();
 
 
 

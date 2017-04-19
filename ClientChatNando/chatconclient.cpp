@@ -26,18 +26,14 @@ ChatConClient::ChatConClient(QWidget *parent,QHostAddress ipclient , quint16 por
     QStringList por = ipclient.toString().split(":");
     ip = por.at(3);
 
-    udp->bind(s->localAddress(),s->localPort()+1);
+    //udp->bind(s->localAddress(),s->localPort()+1);
   /*  qDebug()<<"bind a questo ip"<<ip;
     qDebug()<<"bind a questa porta"<<port;*/
+    udp->bind(s->localAddress(),s->localPort()+1);
     udp->connectToHost(ip,port+1);
     connect(udp,SIGNAL(readyRead()),this,SLOT(connessione()));
+    connect(udp,SIGNAL(disconnected()),this,SLOT(disconnectSocketUdp()));
    // udp->connectToHost(ip,port+1);
-
-
-
-
-
-
 
 }
 
@@ -59,7 +55,12 @@ void ChatConClient::onClickButtonInvia()
     qDebug() << "sending to: " << ip << " - " << port+1;
     udp->write(ui->lineEdit->text().toLatin1());
 
+}
 
+void ChatConClient::disconnectSocketUdp()
+{
+    QUdpSocket* pClient = static_cast<QUdpSocket*>(QObject::sender());
+    pClient->disconnectFromHost();
 
 
 }
