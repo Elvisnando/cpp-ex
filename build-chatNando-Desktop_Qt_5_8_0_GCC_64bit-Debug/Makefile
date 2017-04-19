@@ -51,13 +51,15 @@ OBJECTS_DIR   = ./
 SOURCES       = ../chatNando/main.cpp \
 		../chatNando/mainwindow.cpp \
 		../chatNando/server.cpp \
-		../chatNando/client.cpp moc_mainwindow.cpp \
+		../chatNando/client.cpp \
+		../chatNando/utente.cpp moc_mainwindow.cpp \
 		moc_server.cpp \
 		moc_client.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		server.o \
 		client.o \
+		utente.o \
 		moc_mainwindow.o \
 		moc_server.o \
 		moc_client.o
@@ -233,10 +235,12 @@ DIST          = ../../../Qt/5.8/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.8/gcc_64/mkspecs/features/lex.prf \
 		../chatNando/chatNando.pro ../chatNando/mainwindow.h \
 		../chatNando/server.h \
-		../chatNando/client.h ../chatNando/main.cpp \
+		../chatNando/client.h \
+		../chatNando/utente.h ../chatNando/main.cpp \
 		../chatNando/mainwindow.cpp \
 		../chatNando/server.cpp \
-		../chatNando/client.cpp
+		../chatNando/client.cpp \
+		../chatNando/utente.cpp
 QMAKE_TARGET  = chatNando
 DESTDIR       = 
 TARGET        = chatNando
@@ -614,8 +618,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../chatNando/mainwindow.h ../chatNando/server.h ../chatNando/client.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../chatNando/main.cpp ../chatNando/mainwindow.cpp ../chatNando/server.cpp ../chatNando/client.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../chatNando/mainwindow.h ../chatNando/server.h ../chatNando/client.h ../chatNando/utente.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../chatNando/main.cpp ../chatNando/mainwindow.cpp ../chatNando/server.cpp ../chatNando/client.cpp ../chatNando/utente.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../chatNando/mainwindow.ui ../chatNando/server.ui ../chatNando/client.ui $(DISTDIR)/
 
 
@@ -768,6 +772,14 @@ moc_mainwindow.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkInterface \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../chatNando/client.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDataStream \
 		../chatNando/mainwindow.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
@@ -885,6 +897,9 @@ moc_server.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QWidget \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkInterface \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		../chatNando/server.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
@@ -992,6 +1007,17 @@ moc_client.cpp: ../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
 		../../../Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDataStream \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		../chatNando/client.h \
 		moc_predefs.h \
 		../../../Qt/5.8/gcc_64/bin/moc
@@ -1142,6 +1168,14 @@ main.o: ../chatNando/main.cpp ../chatNando/mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkInterface \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../chatNando/client.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDataStream \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1269,6 +1303,14 @@ mainwindow.o: ../chatNando/mainwindow.cpp ../chatNando/mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkInterface \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		../chatNando/client.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QDialog \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDataStream \
 		ui_mainwindow.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
@@ -1422,6 +1464,9 @@ server.o: ../chatNando/server.cpp ../chatNando/server.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qdialog.h \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkInterface \
 		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		ui_server.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
@@ -1456,7 +1501,21 @@ server.o: ../chatNando/server.cpp ../chatNando/server.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/qrubberband.h \
 		../../../Qt/5.8/gcc_64/include/QtWidgets/QLabel \
-		../../../Qt/5.8/gcc_64/include/QtWidgets/qlabel.h
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QTextBrowser \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtextbrowser.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtextedit.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextdocument.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextoption.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qtextformat.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qpen.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkConfigurationManager \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfigmanager.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QSettings \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsettings.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o server.o ../chatNando/server.cpp
 
 client.o: ../chatNando/client.cpp ../chatNando/client.h \
@@ -1562,8 +1621,276 @@ client.o: ../chatNando/client.cpp ../chatNando/client.h \
 		../../../Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_client.h
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QDataStream \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkSession \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworksession.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		ui_client.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QVariant \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QAction \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qaction.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qicon.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qframe.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		../../../Qt/5.8/gcc_64/include/QtGui/qvalidator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qslider.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/QLabel \
+		../../../Qt/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QtNetwork \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QtNetworkDepends \
+		../../../Qt/5.8/gcc_64/include/QtCore/QtCore \
+		../../../Qt/5.8/gcc_64/include/QtCore/QtCoreDepends \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstracteventdispatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractnativeeventfilter.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstractstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qabstracttransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qarraydataops.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasictimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbitarray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbuffer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbytearraymatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcache.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcollator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineoption.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcommandlineparser.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcryptographichash.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdeadlinetimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qelapsedtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdir.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfileinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdiriterator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeasingcurve.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qendian.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qeventtransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qexception.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfactoryinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfileselector.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QObject \
+		../../../Qt/5.8/gcc_64/include/QtCore/QStringList \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfilesystemwatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfinalstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuture.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfutureinterface.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qrunnable.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qresultstore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuturesynchronizer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qfuturewatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qhistorystate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qidentityproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qisenum.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonarray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonvalue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsondocument.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qjsonobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlibrary.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlibraryinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qversionnumber.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlinkedlist.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlockfile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qloggingcategory.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmath.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmessageauthenticationcode.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmetaobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimedata.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimedatabase.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmimetype.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectcleanuphandler.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qparallelanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpauseanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qplugin.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpluginloader.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qprocess.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpropertyanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qvariantanimation.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qqueue.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qreadwritelock.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qresource.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsavefile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qscopedvaluerollback.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsemaphore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsequentialanimationgroup.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsettings.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsharedmemory.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsignalmapper.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsignaltransition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsocketnotifier.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsortfilterproxymodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstack.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstandardpaths.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstate.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstatemachine.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstorageinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstringlistmodel.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsystemsemaphore.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtemporarydir.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QScopedPointer \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtemporaryfile.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtextboundaryfinder.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtextcodec.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthread.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthreadpool.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qthreadstorage.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimeline.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtimezone.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtranslator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/quuid.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qwaitcondition.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qwineventnotifier.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qxmlstream.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtcoreversion.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractnetworkcache.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkrequest.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QSharedDataPointer \
+		../../../Qt/5.8/gcc_64/include/QtCore/QString \
+		../../../Qt/5.8/gcc_64/include/QtCore/QUrl \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qauthenticator.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qdnslookup.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhostinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qhttpmultipart.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QByteArray \
+		../../../Qt/5.8/gcc_64/include/QtCore/QIODevice \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkRequest \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qlocalserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qlocalsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkaccessmanager.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QSslConfiguration \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslconfiguration.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslerror.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcertificate.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qssl.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QFlags \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QSslPreSharedKeyAuthenticator \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslpresharedkeyauthenticator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QMetaType \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkconfigmanager.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkcookie.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QList \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkcookiejar.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkdatagram.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkdiskcache.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkproxy.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qnetworkreply.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QNetworkAccessManager \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsctpserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpserver.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsctpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcertificateextension.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslcipher.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qssldiffiehellmanparameters.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslellipticcurve.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/QHash \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qsslkey.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qudpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o client.o ../chatNando/client.cpp
+
+utente.o: ../chatNando/utente.cpp ../chatNando/utente.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/QTcpSocket \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtcpsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetworkglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qglobal.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qconfig.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtcore-config.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsysinfo.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlogging.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qflags.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtypetraits.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qatomic.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmutex.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qnumeric.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qversiontagging.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qtnetwork-config.h \
+		../../../Qt/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstring.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qchar.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbytearray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qarraydata.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlist.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qalgorithms.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qiterator.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpair.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstringlist.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qregexp.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcoreevent.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmetatype.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qvector.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qset.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/5.8/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o utente.o ../chatNando/utente.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

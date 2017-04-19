@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QTcpSocket>
+#include <QListWidget>
+#include <QUdpSocket>
 
 namespace Ui {
 class MainWindow;
@@ -28,6 +30,8 @@ private slots:
     void onClickButtoSend();
     void readyReadd();
     void addDalServer(QByteArray a);
+    void connectedd();
+    void onClickItem(QListWidgetItem* item);
 
 private:
     Ui::MainWindow *ui;
@@ -35,6 +39,9 @@ private:
     QByteArray intToArray(qint32 sorce);
     QHash<QTcpSocket*, QByteArray*> buffers;
     QHash<QTcpSocket*, qint32*> sizes;
+    QByteArray nikName;
+    QUdpSocket *udps;
+
 };
 
 #endif // MAINWINDOW_H

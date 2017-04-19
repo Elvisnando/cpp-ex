@@ -3,16 +3,23 @@
 #include "QDebug"
 #include <QHostAddress>
 #include <QVariant>
+#include <chatconclient.h>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow) ,
-    s(new QTcpSocket)
+    s(new QTcpSocket),
+    udps(new QUdpSocket)
 {
     ui->setupUi(this);
     connect(s,SIGNAL(connected()),this,SLOT(conessione()));
     connect(ui->pushButton_2,SIGNAL(clicked(bool)),this,SLOT(onClickButtoSend()));
     connect(s, SIGNAL(readyRead()), this, SLOT(readyReadd()));
+    connect(ui->listWidget,SIGNAL(itemClicked(QListWidgetItem*)),this,SLOT(onClickItem(QListWidgetItem*)));
+
+
+
 
 
 }
@@ -27,8 +34,10 @@ void MainWindow::on_pushButton_clicked()
 {
     QHostAddress ipserver(ui->lineEdit_2->text());
 
+    nikName = ui->lineEdit_4->text().toUtf8();
     s->connectToHost(ipserver,5500);
-    s->waitForConnected(1000);
+    connect(s,SIGNAL(connected()),this,SLOT(connectedd()));
+
    // connect(this,SIGNAL(dataRecived(QByteArray)),this,SLOT(addDalServer(QByteArray)));
 
 }
@@ -71,37 +80,29 @@ void MainWindow::onClickButtoSend()
 
 void MainWindow::readyReadd()
 {
-//    QTcpSocket *socket = static_cast<QTcpSocket*>(sender());
-//    QByteArray *buffer = buffers.value(socket);
-//    qint32 *s = sizes.value(socket);
-//    qint32 size = *s;
 
-
-//    while (socket->bytesAvailable() > 0)
-//    {
-//        buffer->append(socket->readAll());
-//        while ((size == 0 && buffer->size() >= 4) || (size > 0 && buffer->size() >= size)) // lettura del dato
-//        {
-//            if (size == 0 && buffer->size() >= 4) //se la lettura è completa
-//            {
-//                size = ArrayToInt(buffer->mid(0, 4));
-//                *s = size;
-//                buffer->remove(0, 4);
-//            }
-//            if (size > 0 && buffer->size() >= size) // If data has received completely, then emit our SIGNAL with the data
-//            {
-//                QByteArray data = buffer->mid(0, size);
-//                buffer->remove(0, size);
-//                size = 0;
-//                *s = size;
-//                ui->textBrowser->append(data);
-//                emit dataRecived(data);
-//            }
-//        }
-//    }
-    ui->textBrowser->clear();
+   // ui->textBrowser->clear();
+    ui->listWidget->clear();
     QByteArray data = s->readAll();
-    ui->textBrowser->append(data);
+   // ui->listWidget->addItem(data);
+    QString nome;
+    QString dato = data;
+  //  ui->textBrowser->append(data);
+   QStringList mystring = dato.split("\n");
+   int c = 0;
+   while(c < mystring.size()-1) {
+   nome = mystring.at(c);
+   qDebug()<< nome;
+   ui->listWidget->addItem(nome);
+   c++;
+   }
+
+
+
+
+
+
+
 
 
 }
@@ -120,3 +121,31 @@ void MainWindow::addDalServer(QByteArray a)
     //ui->textBrowser->append(a);
 
 }
+
+void MainWindow::connectedd()
+{
+    this->writeData(nikName);
+}
+
+void MainWindow::onClickItem(QListWidgetItem* item)
+{
+
+    QStringList mystrings;
+    mystrings = item->text().split(" ");
+
+    QString port = mystrings.at(2);
+
+
+
+    QHostAddress ipserver(mystrings.at(1));
+
+    //s->connectToHost(ipserver,quint16(port.toUInt()));
+   // ChatConClient * form = new ChatConClient(0,)
+    ChatConClient *form = new ChatConClient(0,ipserver,port.toUShort(),s,udps);
+    form->exec();
+
+
+
+
+}
+

@@ -4,9 +4,11 @@
 #include"QSettings"
 #include "QNetworkSession"
 #include <QTcpSocket>
+#include "utente.h"
 
 static inline qint32 ArrayToInt(QByteArray source);
 
+QByteArray dato = "vuoto";
 Server::Server(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Server)
@@ -74,8 +76,6 @@ void Server::sessionOpened()
 void Server::connessioniAttive()
 
 {
-    qDebug()<<"Ricevuto";
-   // ui->textBrowser->setText("Connessione");
 
     while (tcpServer->hasPendingConnections())
     {
@@ -83,22 +83,37 @@ void Server::connessioniAttive()
 
 
         QTcpSocket *socket = tcpServer->nextPendingConnection();
-        clientSocketList.push_back(socket);
+        connect(socket, SIGNAL(readyRead()), this, SLOT(readyReadd()));
+        //dato = socket->readAll();
+
+        utente* user=new utente(socket,dato);
+        m_clientlist.push_front(user);
 
 
-        QString m = "ciao";
-        foreach (QTcpSocket *w, clientSocketList) {
+       /* foreach (utente*w, m_clientlist) {
+            foreach (utente *p, m_clientlist) {
+                QString m = "ciao";
+                m = p->getSoket()->peerAddress().toString();
+                w->getSoket()->write(p->getNikname() +" "+m.toLatin1()+ " " + m.number(p->getSoket()->peerPort()).toLatin1()+"\n");
+
+            }
+        }*/
+
+
+
+
+       /* foreach (QTcpSocket *w, clientSocketList) {
             foreach (QTcpSocket *p, clientSocketList) {
+                QString m = "ciao";
                 m = p->peerAddress().toString();
                 w->write(m.toLatin1()+ " " + m.number(p->peerPort()).toLatin1()+"\n");
-               // w->write(m.number(p->peerPort()).toLatin1());
-               // w->write("\n");
+
             }
-        }
+        }*/
 
         int a = socket->peerPort();
         ui->textBrowser->append(socket->localAddress().toString()+ " "+ socket->localPort());
-        connect(socket, SIGNAL(readyRead()), this, SLOT(readyReadd()));
+
         qDebug()<<" la porta è:  "<<socket->peerPort();
 
         QByteArray *buffer = new QByteArray();
@@ -116,6 +131,7 @@ void Server::connessioniAttive()
 
 
 }
+
 
 void Server::readyReadd()
 {
@@ -141,14 +157,26 @@ void Server::readyReadd()
                 size = 0;
                 *s = size;
                 ui->textBrowser->append(data);
-                emit dataRecived(data);
+                dato = data;
 
-            }
+                m_clientlist[0]->setNik(dato);
+                foreach (utente*w, m_clientlist) {
+                    foreach (utente *p, m_clientlist) {
+                        QString m = "ciao";
+                        m = p->getSoket()->peerAddress().toString();
+                        w->getSoket()->write(p->getNikname() +" "+m.toLatin1()+ " " + m.number(p->getSoket()->peerPort()).toLatin1()+"\n");
+
+                    }
+                }
+
+
+
         }
 
     }
-socket->write("ciockkodcko");
+//socket->write("ciockkodcko");
 
+}
 }
 
 
@@ -171,15 +199,41 @@ void Server::ClientDisconnected()
 {
     QTcpSocket* pClient = static_cast<QTcpSocket*>(QObject::sender());
     clientSocketList.removeOne(pClient);
-    qDebug() << "ci siamo disconessi ";
-    QString m = "ciao";
+
+     foreach (utente *p, m_clientlist) {
+        if(p->getSoket() == pClient)
+        {
+            m_clientlist.removeOne(p);
+            break;
+        }
+
+    }
+
+     foreach (utente*w, m_clientlist) {
+         foreach (utente *p, m_clientlist) {
+             QString m = "ciao";
+             m = p->getSoket()->peerAddress().toString();
+             w->getSoket()->write(p->getNikname() +" "+m.toLatin1()+ " " + m.number(p->getSoket()->peerPort()).toLatin1()+"\n");
+
+         }
+     }
+
+
+
+
+  /*  qDebug() << "ci siamo disconessi ";
     foreach (QTcpSocket *w, clientSocketList) {
         foreach (QTcpSocket *p, clientSocketList) {
+            QString m = "ciao";
             m = p->peerAddress().toString();
             w->write(m.toLatin1()+ " " + m.number(p->peerPort()).toLatin1()+"\n");
-           // w->write(m.number(p->peerPort()).toLatin1());
-           // w->write("\n");
+
         }
-    }
+    }*/
+
+}
+
+void Server::connectedd()
+{
 
 }

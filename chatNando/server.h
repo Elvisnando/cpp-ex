@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <QNetworkInterface>
 #include<QNetworkSession>
+#include "utente.h"
 
 namespace Ui {
 class Server;
@@ -30,6 +31,7 @@ private slots:
     void connessioniAttive();
     void readyReadd();
     void shoeData(QByteArray d);
+    void connectedd();
 
 
 
@@ -41,6 +43,7 @@ private:
     QHash<QTcpSocket*, QByteArray*> buffers;
     QHash<QTcpSocket*, qint32*> sizes;
     QList<QTcpSocket*> clientSocketList;
+    QList<utente*> m_clientlist;
 
 };
 
