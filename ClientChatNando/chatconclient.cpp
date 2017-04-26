@@ -16,13 +16,13 @@ ChatConClient::ChatConClient(QWidget *parent) :
 
 }
 
-ChatConClient::ChatConClient(QWidget *parent,QHostAddress ipclient , quint16 porta, QTcpSocket *ss, QUdpSocket *udps ) :
+ChatConClient::ChatConClient(QWidget *parent,QHostAddress ipclient , quint16 porta, QTcpSocket *ss ) :
     ChatConClient(parent)
 {
     ip = ipclient;
     port = porta;
     s = ss;
-    udp = udps;
+    udp = new QUdpSocket;
     QStringList por = ipclient.toString().split(":");
     ip = por.at(3);
 
@@ -30,15 +30,19 @@ ChatConClient::ChatConClient(QWidget *parent,QHostAddress ipclient , quint16 por
   /*  qDebug()<<"bind a questo ip"<<ip;
     qDebug()<<"bind a questa porta"<<port;*/
     udp->bind(s->localAddress(),s->localPort()+1);
-    udp->connectToHost(ip,port+1);
-    connect(udp,SIGNAL(readyRead()),this,SLOT(connessione()));
-    connect(udp,SIGNAL(disconnected()),this,SLOT(disconnectSocketUdp()));
-   // udp->connectToHost(ip,port+1);
+        udp->connectToHost(ip,port+1);
+        qDebug()<<udp->state();
+        connect(udp,SIGNAL(readyRead()),this,SLOT(connessione()));
+        //connect(udp,SIGNAL(connected()),this,SLOT(newconnetcio()));
+        //connect(udp,SIGNAL(disconnected()),this,SLOT(disconnectSocketUdp()));
+        // udp->connectToHost(ip,port+1);
 
 }
 
 ChatConClient::~ChatConClient()
 {
+    udp->disconnect();
+    delete udp;
     delete ui;
 }
 
@@ -47,6 +51,7 @@ void ChatConClient::connessione()
     QString mess = udp->readAll();
     ui->textBrowser->append(mess);
     qDebug()<<"ricevo nele ready";
+
 }
 
 void ChatConClient::onClickButtonInvia()
@@ -55,12 +60,18 @@ void ChatConClient::onClickButtonInvia()
     qDebug() << "sending to: " << ip << " - " << port+1;
     udp->write(ui->lineEdit->text().toLatin1());
 
+
 }
 
 void ChatConClient::disconnectSocketUdp()
 {
-    QUdpSocket* pClient = static_cast<QUdpSocket*>(QObject::sender());
-    pClient->disconnectFromHost();
 
 
+
+
+}
+
+void ChatConClient::newconnetcio()
+{
+    qDebug()<<"nuova connessione";
 }

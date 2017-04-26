@@ -16,8 +16,7 @@ class ChatConClient : public QDialog
 
 public:
     explicit ChatConClient(QWidget *parent = 0);
-    ChatConClient(QWidget *parent, QHostAddress ipclient , quint16 porta, QTcpSocket* ss, QUdpSocket *udps );
-
+    ChatConClient(QWidget *parent, QHostAddress ipclient , quint16 porta, QTcpSocket* ss);
     ~ChatConClient();
 
 private:
@@ -31,6 +30,7 @@ private slots:
     void connessione();
     void onClickButtonInvia();
     void disconnectSocketUdp();
+    void newconnetcio();
 
 
 

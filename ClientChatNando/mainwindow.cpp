@@ -38,6 +38,7 @@ void MainWindow::on_pushButton_clicked()
     nikName = ui->lineEdit_4->text().toUtf8();
     s->connectToHost(ipserver,5500);
     connect(s,SIGNAL(connected()),this,SLOT(connectedd()));
+    ui->widget->setEnabled(false);
 
    // connect(this,SIGNAL(dataRecived(QByteArray)),this,SLOT(addDalServer(QByteArray)));
 
@@ -64,7 +65,7 @@ bool MainWindow::writeData(QByteArray data)
 
 QByteArray MainWindow::intToArray(qint32 sorce)
 {
-    QByteArray temp;
+        QByteArray temp;
         QDataStream data(&temp, QIODevice::ReadWrite);
         data << sorce;
         return temp;
@@ -76,19 +77,36 @@ void MainWindow::onClickButtoSend()
 
     this->writeData(ui->lineEdit_3->text().toUtf8());
 
+
 }
 
 
 void MainWindow::readyReadd()
 {
 
-   // ui->textBrowser->clear();
-    ui->listWidget->clear();
+
+
+
     QByteArray data = s->readAll();
-   // ui->listWidget->addItem(data);
+
     QString nome;
     QString dato = data;
-  //  ui->textBrowser->append(data);
+
+    QStringList mystring1 = dato.split(" ");
+
+    if(mystring1.at(0)== "123")
+    {
+
+        QString port = mystring1.at(1);
+        qDebug()<<"SIIIIII " << port;
+        ChatConClient *form = new ChatConClient(0,QHostAddress("::ffff:192.168.1.96"),port.toUShort(),s);
+
+        form->exec();
+        delete form;
+
+    } else {
+
+    ui->listWidget->clear();
    QStringList mystring = dato.split("\n");
    int c = 0;
    while(c < mystring.size()-1) {
@@ -97,14 +115,7 @@ void MainWindow::readyReadd()
    ui->listWidget->addItem(nome);
    c++;
    }
-
-
-
-
-
-
-
-
+}
 
 }
 
@@ -142,10 +153,11 @@ void MainWindow::onClickItem(QListWidgetItem* item)
 
     //s->connectToHost(ipserver,quint16(port.toUInt()));
    // ChatConClient * form = new ChatConClient(0,)
-    ChatConClient *form = new ChatConClient(0,ipserver,port.toUShort(),s,udps);
+    ChatConClient *form = new ChatConClient(0,ipserver,port.toUShort(),s);
+    QString inf = "123 "+port.toLatin1()+" "+ QString::number(s->localPort());
+    this->writeData(inf.toLatin1());
     form->exec();
-
-
+    delete form;
 
 
 }

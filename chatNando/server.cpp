@@ -81,36 +81,11 @@ void Server::connessioniAttive()
     {
         qDebug()<<"c'è la connesione";
 
-
         QTcpSocket *socket = tcpServer->nextPendingConnection();
         connect(socket, SIGNAL(readyRead()), this, SLOT(readyReadd()));
-        //dato = socket->readAll();
 
         utente* user=new utente(socket,dato);
         m_clientlist.push_front(user);
-
-
-       /* foreach (utente*w, m_clientlist) {
-            foreach (utente *p, m_clientlist) {
-                QString m = "ciao";
-                m = p->getSoket()->peerAddress().toString();
-                w->getSoket()->write(p->getNikname() +" "+m.toLatin1()+ " " + m.number(p->getSoket()->peerPort()).toLatin1()+"\n");
-
-            }
-        }*/
-
-
-
-
-       /* foreach (QTcpSocket *w, clientSocketList) {
-            foreach (QTcpSocket *p, clientSocketList) {
-                QString m = "ciao";
-                m = p->peerAddress().toString();
-                w->write(m.toLatin1()+ " " + m.number(p->peerPort()).toLatin1()+"\n");
-
-            }
-        }*/
-
         int a = socket->peerPort();
         ui->textBrowser->append(socket->localAddress().toString()+ " "+ socket->localPort());
 
@@ -120,15 +95,9 @@ void Server::connessioniAttive()
         qint32 *s = new qint32(0);
         buffers.insert(socket, buffer);
         sizes.insert(socket, s);
-
         connect(socket, &QTcpSocket::disconnected, this, &Server::ClientDisconnected);
 
-
-
     }
-
-
-
 
 }
 
@@ -158,6 +127,32 @@ void Server::readyReadd()
                 *s = size;
                 ui->textBrowser->append(data);
                 dato = data;
+                QString dato1 = data;
+
+                QStringList my = dato1.split(" ");
+                qDebug() <<"VALORE RICEVUTO PER APRIRE CHAT DORMIENTE"<<my.at(0);
+
+                if(my.at(0) == "123") {
+                    qDebug() <<"VALORE  porta da trova"<<my.at(1);
+
+                    foreach (utente *w, m_clientlist)
+                    {
+                        qDebug() <<"VALORE  porta  soket"<<w->getSoket()->peerPort();
+                        if(my.at(1) == QString::number( w->getSoket()->peerPort()))
+                        {
+                            QString inf = "123 "+my.at(2);
+                            w->getSoket()->write(inf.toLatin1());
+                            qDebug()<<"invio segnale al cliente con write da server" <<inf.toLatin1();
+                        }
+
+
+
+                    }
+
+
+                }else {
+
+
 
                 m_clientlist[0]->setNik(dato);
                 foreach (utente*w, m_clientlist) {
@@ -168,6 +163,7 @@ void Server::readyReadd()
 
                     }
                 }
+            }
 
 
 
