@@ -91,6 +91,7 @@ void MainWindow::readyReadd()
 
     QString nome;
     QString dato = data;
+    QString dato1 = data;
 
     QStringList mystring1 = dato.split(" ");
 
@@ -99,7 +100,7 @@ void MainWindow::readyReadd()
 
         QString port = mystring1.at(1);
         qDebug()<<"SIIIIII " << port;
-        ChatConClient *form = new ChatConClient(0,QHostAddress("::ffff:192.168.1.96"),port.toUShort(),s);
+        ChatConClient *form = new ChatConClient(0,QHostAddress(mystring1.at(2)),port.toUShort(),s);
 
         form->exec();
         delete form;
@@ -107,7 +108,7 @@ void MainWindow::readyReadd()
     } else {
 
     ui->listWidget->clear();
-   QStringList mystring = dato.split("\n");
+   QStringList mystring = dato1.split("\n");
    int c = 0;
    while(c < mystring.size()-1) {
    nome = mystring.at(c);
@@ -149,12 +150,13 @@ void MainWindow::onClickItem(QListWidgetItem* item)
 
 
 
+
     QHostAddress ipserver(mystrings.at(1));
 
     //s->connectToHost(ipserver,quint16(port.toUInt()));
    // ChatConClient * form = new ChatConClient(0,)
     ChatConClient *form = new ChatConClient(0,ipserver,port.toUShort(),s);
-    QString inf = "123 "+port.toLatin1()+" "+ QString::number(s->localPort());
+    QString inf = ("123 "+port.toLatin1()+" "+ QString::number(s->localPort())+" "+ s->localAddress().toString());
     this->writeData(inf.toLatin1());
     form->exec();
     delete form;

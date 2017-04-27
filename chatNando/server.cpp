@@ -140,7 +140,7 @@ void Server::readyReadd()
                         qDebug() <<"VALORE  porta  soket"<<w->getSoket()->peerPort();
                         if(my.at(1) == QString::number( w->getSoket()->peerPort()))
                         {
-                            QString inf = "123 "+my.at(2);
+                            QString inf = "123 "+my.at(2)+" ::ffff:"+my.at(3);
                             w->getSoket()->write(inf.toLatin1());
                             qDebug()<<"invio segnale al cliente con write da server" <<inf.toLatin1();
                         }

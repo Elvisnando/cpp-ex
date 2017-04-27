@@ -29,7 +29,7 @@ ChatConClient::ChatConClient(QWidget *parent,QHostAddress ipclient , quint16 por
     //udp->bind(s->localAddress(),s->localPort()+1);
   /*  qDebug()<<"bind a questo ip"<<ip;
     qDebug()<<"bind a questa porta"<<port;*/
-    udp->bind(s->localAddress(),s->localPort()+1);
+        udp->bind(s->localAddress(),s->localPort()+1);
         udp->connectToHost(ip,port+1);
         qDebug()<<udp->state();
         connect(udp,SIGNAL(readyRead()),this,SLOT(connessione()));
